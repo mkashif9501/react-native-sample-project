@@ -1,32 +1,41 @@
-// src/screens/LoginScreen.js
-
 import React, {useState} from 'react';
-import {View, Text, Button, StyleSheet, Image, TextInput, KeyboardAvoidingView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TextInput,
+  TouchableOpacity,
+  ImageBackground,
+  Pressable,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import CustomButton from './Components/Button';
+import LinearGradient from 'react-native-linear-gradient';
+
 const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState('');
 
   return (
-    <KeyboardAvoidingView style={{flex: 1}} behavior='padding'>
-    <View style={styles.container} >
+    <View style={styles.container}>
       <View style={styles.topImageContainer}>
         <Image
           source={require('../../assets/images/Top-Login.png')}
-          style={styles.topImage}></Image>
+          style={styles.topImage}
+        />
       </View>
       <View style={styles.headingContainer}>
         <Text style={styles.homeText}>Hello</Text>
       </View>
       <View>
-        <Text style={styles.signinText}>Sign in to your account</Text>
+        <Text style={styles.signinText}>Login to your account</Text>
       </View>
       <View style={styles.inputContainer}>
         <Icon name="user" size={24} style={styles.userIcon} />
         <TextInput
           placeholder="Username"
           placeholderTextColor="#9A9A9A"
-          style={styles.textInput}></TextInput>
+          style={styles.textInput}
+        />
       </View>
       <View style={styles.passwordContainer}>
         <Icon name="lock" size={24} style={styles.userIcon} />
@@ -35,19 +44,28 @@ const LoginScreen = ({navigation}) => {
           placeholder="Password"
           onChangeText={setPassword}
           placeholderTextColor="#9A9A9A"
-          style={styles.textInput}></TextInput>
+          style={styles.textInput}
+        />
       </View>
-
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          title="Login"
-          onPress={() => navigation.navigate('Home')}></CustomButton>
+      <Text style={styles.forgotPassword}>Forgot your password?</Text>
+      <Pressable onPress={() => navigation.navigate('Signup')}  style={styles.signInContainer}>
+        <Text style={styles.signInButtonText}>Login</Text>
+        <Image
+          style={styles.signInImage}
+          source={require('../../assets/images/Arrow.png')}></Image>
+      </Pressable>
+      <Text
+        style={styles.createAccount}
+        onPress={() => navigation.navigate('Signup')}>
+        Don't have an account? Create
+      </Text>
+      <View style={styles.bottomImageContainer}>
+        <ImageBackground
+          source={require('../../assets/images/Bottom-SignIn.png')}
+          style={styles.bottomImage}
+        />
       </View>
-      {/* <View style={styles.bottomImageContainer}>
-        <Image source={require("../../assets/images/Bottom-Login.png")} style={styles.bottomImage}></Image>
-      </View> */}
     </View>
-    </KeyboardAvoidingView>
   );
 };
 
@@ -57,7 +75,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
     flex: 1,
-    // marginTop: 30,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -66,7 +83,6 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    // zIndex: 1,
   },
   topImage: {
     width: '100%',
@@ -76,7 +92,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 70,
     fontWeight: '500',
-    marginTop: 50,
+    marginTop: 100,
   },
   signinText: {
     textAlign: 'center',
@@ -104,7 +120,6 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     width: '100%',
     height: '100%',
-    // backgroundColor: 'red',
     padding: 10,
   },
   passwordContainer: {
@@ -119,22 +134,47 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     overflow: 'hidden',
   },
-  bottomImage: {
-    position: 'absolute',
-    top: 0,
-    // width: '100%',
-    // height: 130,
-    // resizeMode: 'contain'
+  forgotPassword: {
+    width: '80%',
+    fontSize: 15,
+    textAlign: 'right',
+    color: '#bebebe',
   },
-  buttonContainer: {
-    marginTop: 30,
-    width: '100%',
+  signInContainer: {
+    marginTop: 50,
+    width: '80%',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
     alignItems: 'center',
-    // backgroundColor: 'red',
   },
-  loginButton: {
-    width: '100%',
-    backgroundColor: 'blue',
-    borderRadius: 30,
+  signInButtonText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginRight: 10,
+    // flexDirection: 'row',
+
+  },
+  signInImage: {
+    width: '20%',
+    height: 40,
+   
+
+  },
+  createAccount: {
+    width: '80%',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 100,
+    fontWeight: 'bold',
+  },
+  bottomImageContainer: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+  },
+  bottomImage: {
+    height: 270,
+    width: 200,
   },
 });
